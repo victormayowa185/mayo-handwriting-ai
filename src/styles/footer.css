@@ -1,0 +1,110 @@
+/* ==================== BASE MOBILE STYLES ==================== */
+.footer {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  color: #888;
+  flex-wrap: wrap;
+  padding: 1rem;
+  width: 100%;
+}
+
+.brand-mayo {
+  font-weight: 700;
+  color: #000;
+  white-space: nowrap;
+}
+
+.brand-name {
+  font-weight: 700;
+  color: #5c7bff;
+  text-decoration: none;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.brand-name:hover {
+  color: #5c7bff;
+}
+
+.github-link {
+  color: #333;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.github-link:hover {
+  color: #333;
+}
+
+/* ==================== TABLET STYLES (600px+) ==================== */
+@media (min-width: 600px) {
+  .footer {
+    margin-top: 3rem;
+    gap: 1rem;
+    font-size: clamp(0.8rem, 1.8vw, 0.875rem);
+    padding: 1.5rem;
+  }
+}
+
+/* ==================== MEDIUM TABLET STYLES (800px+) ==================== */
+@media (min-width: 800px) {
+  .footer {
+    margin-top: 3.5rem;
+    gap: 1.2rem;
+    padding: 2rem;
+  }
+}
+
+
+
+
+
+/* ==================== SMALL DEVICES (320px - 380px) ==================== */
+@media (max-width: 380px) {
+  .footer {
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.75rem;
+  }
+}
+
+/* ==================== LANDSCAPE ORIENTATION ==================== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .footer {
+    margin-top: 1rem;
+    gap: 0.8rem;
+    padding: 0.75rem;
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+  }
+}
+
+/* ==================== ACCESSIBILITY & PRINT STYLES ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .brand-name,
+  .github-link {
+    transition: none;
+  }
+}
+
+@media print {
+  .footer {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .github-link {
+    display: none;
+  }
+}
+
+/* ==================== SMOOTH TRANSITIONS ==================== */
+* {
+  box-sizing: border-box;
+}
