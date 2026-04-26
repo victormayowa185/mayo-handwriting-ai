@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import Tesseract from "tesseract.js";
 
 const OCR = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -8,7 +7,7 @@ const OCR = () => {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Convert file to data URL
+  // Convert file to data URL (used by both file upload and paste)
   const readFileAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -18,28 +17,12 @@ const OCR = () => {
     });
   };
 
-  // Handle file selection
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      const dataUrl = await readFileAsDataURL(file);
-      setImageUrl(dataUrl);
-      setText("");
-      setError(null);
-      // Automatically start recognition
-      await recognizeText(dataUrl);
-    } catch (err) {
-      setError("Failed to read image.");
-    }
-  };
-
-  // Run Tesseract.js on the image
+  // Tesseract recognition (dynamic import to stay Vite‑friendly)
   const recognizeText = async (imgUrl: string) => {
     setLoading(true);
     setError(null);
     try {
+      const { default: Tesseract } = await import("tesseract.js");
       const worker = await Tesseract.createWorker("eng");
       const { data } = await worker.recognize(imgUrl);
       setText(data.text);
@@ -52,14 +35,56 @@ const OCR = () => {
     }
   };
 
-  // Manual trigger if needed
+  // Regular file input upload
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const dataUrl = await readFileAsDataURL(file);
+      setImageUrl(dataUrl);
+      setText("");
+      setError(null);
+      await recognizeText(dataUrl);
+    } catch (err) {
+      setError("Failed to read image.");
+    }
+  };
+
+  // Paste handler for Ctrl+V
+  const handlePaste = async (e: React.ClipboardEvent) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (const item of items) {
+      if (item.type.startsWith("image/")) {
+        const file = item.getAsFile();
+        if (file) {
+          e.preventDefault(); // stop default paste behavior
+          setText("");
+          setError(null);
+          const dataUrl = await readFileAsDataURL(file);
+          setImageUrl(dataUrl);
+          await recognizeText(dataUrl);
+          break; // only first image
+        }
+      }
+    }
+  };
+
+  // Manual re‑run button
   const handleManualRecognize = () => {
     if (imageUrl) recognizeText(imageUrl);
   };
 
   return (
-    <div>
+    <div
+      onPaste={handlePaste}
+      tabIndex={0} // needed for paste to fire without clicking an input
+      style={{ outline: "none", minHeight: "100vh", padding: "1rem" }}
+    >
       <h2>Handwriting Recognition</h2>
+      <p style={{ color: "#888", fontStyle: "italic" }}>
+        Tip: You can also paste an image (Ctrl+V) anywhere on this page.
+      </p>
 
       <input
         type="file"
