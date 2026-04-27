@@ -34,23 +34,36 @@ const OCR = () => {
   };
 
   // Tesseract recognition with cancellation support
+  // Tesseract recognition with cancellation support
   const recognizeText = async (imgUrl: string) => {
     try {
       const { default: Tesseract } = await import("tesseract.js");
-      if (cancelledRef.current) {
-        return; // exit early if cancelled
-      }
+      if (cancelledRef.current) return;
+
       const worker = await Tesseract.createWorker("eng");
       workerRef.current = worker;
       if (cancelledRef.current) {
         await worker.terminate();
         return;
       }
+
       const { data } = await worker.recognize(imgUrl);
       if (cancelledRef.current) {
         await worker.terminate();
         return;
       }
+
+      // ── Check if any text was found ──
+      if (!data.text.trim()) {
+        // No text recognized – treat as error
+        setError("Couldn't find any text. Please try a clearer image.");
+        setPhase("idle");
+        await worker.terminate();
+        workerRef.current = null;
+        return;
+      }
+
+      // Success: text found
       setText(data.text);
       setError(null);
       setPhase("result");
@@ -194,9 +207,7 @@ const OCR = () => {
       {/* ── Idle State ── */}
       {phase === "idle" && (
         <div className="idle-container">
-          <p className="page-tip">
-            Upload an image or paste from clipboard <kbd>Ctrl+V</kbd>
-          </p>
+          <p className="page-tip">Upload an image or paste from clipboard</p>
           <label htmlFor="file-upload" className="upload-button">
             Choose File
           </label>

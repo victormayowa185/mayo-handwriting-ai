@@ -40,7 +40,7 @@
 
 /* ── Hero text ── */
 .hero-text {
-  font-family: Playwrite No !important;
+  font-family: Reenie Beanie;
   font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 600;
   color: #121212;
