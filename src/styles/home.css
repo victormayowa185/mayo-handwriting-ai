@@ -61,6 +61,30 @@
   opacity: 0;
 }
 
+.cta-message {
+  font-family: 'Mulish', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #121212;
+  background: rgba(134, 71, 240, 0.05);   /* very subtle purple tint */
+  padding: 1.2rem 2rem;
+  border-radius: 16px;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(134, 71, 240, 0.06);
+  letter-spacing: 0.3px;
+}
+
+.cta-message span {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #555;
+  display: block;
+  margin-top: 0.5rem;
+}
+
 /* ── Four QR‑style corners ── */
 .corner {
   position: absolute;
@@ -187,7 +211,7 @@
   font-weight: 600;
   font-size: 1.1rem;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 20px;
   transition:
     background-color 0.3s ease,
     transform 0.2s ease;
@@ -288,32 +312,166 @@
   text-align: left;
 }
 
-/* ── Mobile: wrap into multiple rows ── */
-@media (max-width: 850px) {
+
+
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE – TABLETS & SMALL LAPTOPS (≤900px)
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .home {
+    padding: 1.5rem 1rem;
+    gap: 2.5rem;
+  }
+
+  .scanner-container {
+    max-width: 100%;
+    margin-top: 2vh;
+  }
+
+  .content-area {
+    padding: 2rem 1.5rem;
+    min-height: 220px;
+  }
+
+  .hero-text {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+
+  .cta-message {
+    font-size: 1.15rem;
+    padding: 1rem 1.5rem;
+    max-width: 90%;
+  }
+
+  .cta-message span {
+    font-size: 0.9rem;
+  }
+
+  .cta-link {
+    font-size: 1rem;
+    padding: 0.75rem 1.8rem;
+  }
+
+  /* corners */
+  .corner {
+    width: 24px;
+    height: 24px;
+  }
+  .corner::before { height: 3px; }
+  .corner::after  { width: 3px; }
+
+  .scan-line {
+    height: 3px;
+  }
+
+  /* Feature cards wrap into 2 columns */
   .features-grid {
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .feature-card {
-    width: calc(50% - 1.5rem); /* 2 cards per row */
-    min-width: 250px;
-  }
-}
-
-@media (max-width: 550px) {
-  .feature-card {
-    width: 100%; /* single column */
+    width: calc(50% - 2rem);
     min-width: auto;
+    padding: 1.5rem 1rem;
   }
 }
 
-/* ── Dark mode (unchanged) ── */
-@media (prefers-color-scheme: dark) {
+/* ══════════════════════════════════════════
+   RESPONSIVE – MOBILE LARGE (≤550px)
+   ══════════════════════════════════════════ */
+@media (max-width: 550px) {
   .home {
-    background-color: white;
+    padding: 1rem 0.8rem;
+    gap: 2rem;
   }
+
+  .scanner-container {
+    margin-top: 1vh;
+  }
+
+  .content-area {
+    padding: 1.5rem 1rem;
+    min-height: 200px;
+  }
+
   .hero-text {
-    color: black;
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .cta-message {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    max-width: 95%;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .cta-message span {
+    font-size: 0.8rem;
+  }
+
+  .cta-link {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .corner {
+    width: 20px;
+    height: 20px;
+  }
+  .corner::before { height: 2px; }
+  .corner::after  { width: 2px; }
+
+  .scan-line {
+    height: 2px;
+  }
+
+  /* Feature cards full width */
+  .feature-card {
+    width: 100%;
+    padding: 1.2rem 1rem;
+  }
+
+  .feature-icon {
+    font-size: 1.8rem;
+  }
+
+  .feature-line {
+    width: 80px;
+    height: 2px;
+  }
+
+  .feature-text {
+    width: 100%;
   }
 }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE – SMALL MOBILE (≤360px)
+   ══════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .hero-text {
+    font-size: clamp(1.6rem, 10vw, 2rem);
+  }
+
+  .cta-message {
+    font-size: 0.9rem;
+  }
+
+  .cta-link {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .corner {
+    width: 18px;
+    height: 18px;
+  }
+}
+

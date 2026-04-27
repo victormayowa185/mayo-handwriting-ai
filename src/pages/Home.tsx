@@ -102,7 +102,7 @@ const Home = () => {
             { opacity: 1, duration: 0.5, ease: "power2.out" },
             "-=0.3",
           )
-          .to(output, { opacity: 0, duration: 0.3, delay: 0.9 }); // ⏱ how long message stays visible
+          .to(output, { opacity: 0, duration: 0.6, delay: 11.9 }); // ⏱ how long message stays visible
 
         loopTlRef.current = loopTl;
       },
@@ -187,7 +187,8 @@ const Home = () => {
           <div className="scan-line" ref={scanLineRef}></div>
           <div className="output-text" ref={outputRef}>
             <p className="cta-message">
-              Convert your handwriting to digital text instantly.
+              AI‑powered handwriting to text. <br />
+              <span>Just upload, paste, or drop.</span>
             </p>
           </div>
         </div>

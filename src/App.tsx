@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import OCR from "./pages/OCR";
 import Nav from "./components/Navbar";
 import Footer from "./components/Footer"; 
-import Contact from "./pages/Contact"
+import Contact from "./pages/Contact";
 import "./App.css";
 
 function App() {
