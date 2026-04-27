@@ -20,14 +20,14 @@
 
 .brand-name {
   font-weight: 700;
-  color: #5c7bff;
+  color: #8647f0;
   text-decoration: none;
   transition: color 0.2s;
   white-space: nowrap;
 }
 
 .brand-name:hover {
-  color: #5c7bff;
+  color: #8647f0;
 }
 
 .github-link {

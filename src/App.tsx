@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import OCR from "./pages/OCR";
-import Nav from "./components/Navbar"; // adjust path if yours is different
-import Footer from "./components/Footer"; // adjust path if yours is different
-import "./App.css"; // your global styles (Mulish, colors, etc.)
+import Nav from "./components/Navbar";
+import Footer from "./components/Footer"; 
+import "./App.css";
 
 function App() {
   return (

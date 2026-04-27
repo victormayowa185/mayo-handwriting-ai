@@ -1,0 +1,328 @@
+/* =====================
+   OCR Page – Clean White UI
+   Primary: #8647f0
+   ===================== */
+
+.ocr-page {
+  background-color: #ffffff;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Mulish', sans-serif;
+  padding: 2rem;
+  outline: none;
+}
+
+/* ── Idle State ── */
+.idle-container {
+  text-align: center;
+  max-width: 600px;
+}
+
+.page-title {
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 700;
+  color: #121212;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.page-title .brand {
+  color: #8647f0;
+}
+
+.page-tip {
+  color: #666;
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.page-tip kbd {
+  background: #f3f3f3;
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  font-family: inherit;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.upload-button {
+  display: inline-block;
+  background-color: #8647f0;
+  color: #ffffff;
+  padding: 0.85rem 2.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(134, 71, 240, 0.25);
+}
+
+.upload-button:hover {
+  background-color: #6e2fd4;
+  transform: translateY(-2px);
+}
+
+.upload-button:active {
+  transform: translateY(0);
+}
+
+/* ── Scanning State ── */
+.scanning-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.scan-box {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  min-height: 250px;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.scan-info {
+  text-align: center;
+  z-index: 1;
+}
+
+.file-name {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ── QR‑style corners ── */
+.corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: #8647f0;
+}
+
+.corner.top-left {
+  top: 0;
+  left: 0;
+}
+.corner.top-left::before {
+  width: 100%;
+  height: 4px;
+  top: 0;
+  left: 0;
+}
+.corner.top-left::after {
+  width: 4px;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.corner.top-right {
+  top: 0;
+  right: 0;
+}
+.corner.top-right::before {
+  width: 100%;
+  height: 4px;
+  top: 0;
+  right: 0;
+}
+.corner.top-right::after {
+  width: 4px;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+
+.corner.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+.corner.bottom-left::before {
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+}
+.corner.bottom-left::after {
+  width: 4px;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.corner.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+.corner.bottom-right::before {
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  right: 0;
+}
+.corner.bottom-right::after {
+  width: 4px;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+}
+
+/* ── Laser scan line ── */
+.scan-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #8647f0, transparent);
+  filter: blur(1px);
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ── Cancel button ── */
+.cancel-button {
+  margin-top: 0.5rem;
+  padding: 0.6rem 2rem;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #8647f0;
+  background: transparent;
+  border: 2px solid #8647f0;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+  background: #8647f0;
+  color: #fff;
+}
+
+/* ── Result State ── */
+.result-container {
+  width: 100%;
+  max-width: 650px;
+}
+
+.result-card {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+}
+
+.result-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #121212;
+  margin-bottom: 1rem;
+}
+
+.result-text {
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.2rem;
+  white-space: pre-wrap;
+  font-family: 'Mulish', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #121212;
+  min-height: 120px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+}
+
+.result-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  padding: 0.75rem 1.8rem;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #8647f0;
+  color: #fff;
+}
+
+.action-button:hover {
+  background: #6e2fd4;
+  transform: translateY(-2px);
+}
+
+.action-button.secondary {
+  background: transparent;
+  color: #8647f0;
+  border: 2px solid #8647f0;
+}
+
+.action-button.secondary:hover {
+  background: #8647f0;
+  color: #fff;
+}
+
+.ai-tag {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.8rem;
+  margin-top: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Error text ── */
+.error-text {
+  color: #d32f2f;
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .scan-box {
+    padding: 1.5rem;
+  }
+  .result-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .action-button {
+    width: 100%;
+    text-align: center;
+  }
+}
