@@ -306,17 +306,171 @@
   font-size: 0.9rem;
 }
 
-/* ── Responsive ── */
-@media (max-width: 480px) {
+/* ─────────────────────────────────────────
+   RESPONSIVE – TABLET (≤768px)
+   ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ocr-page {
+    padding: 1.5rem 1rem;
+    min-height: 60vh;
+  }
+
+  .idle-container {
+    max-width: 100%;
+  }
+
+  .page-tip {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .upload-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+  }
+
   .scan-box {
     padding: 1.5rem;
+    min-height: 200px;
   }
+
+  .file-name {
+    font-size: 1rem;
+  }
+
+  .corner {
+    width: 24px;
+    height: 24px;
+  }
+
+  .result-card {
+    padding: 1.5rem;
+  }
+
+  .result-text {
+    font-size: 0.95rem;
+    padding: 1rem;
+    min-height: 100px;
+    max-height: 300px;
+  }
+
   .result-actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 0.8rem;
   }
+
   .action-button {
     width: 100%;
     text-align: center;
+  }
+
+  .cancel-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE – MOBILE (≤480px)
+   ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .ocr-page {
+    padding: 1rem 0.8rem;
+    min-height: 70vh;
+  }
+
+  .page-tip {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0;
+    background: transparent;         /* remove pill background on tiny screens */
+    color: #333;
+  }
+
+  .upload-button {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .scan-box {
+    padding: 1rem;
+    min-height: 180px;
+  }
+
+  .scan-info {
+    padding: 0 0.5rem;
+  }
+
+  .file-name {
+    font-size: 0.95rem;
+  }
+
+  .corner {
+    width: 20px;
+    height: 20px;
+  }
+
+  .corner::before,
+  .corner::after {
+    /* thinner arms on tiny screens */
+  }
+  .corner.top-left::before, .corner.top-right::before,
+  .corner.bottom-left::before, .corner.bottom-right::before {
+    height: 3px;
+  }
+  .corner.top-left::after, .corner.top-right::after,
+  .corner.bottom-left::after, .corner.bottom-right::after {
+    width: 3px;
+  }
+
+  .scan-line {
+    height: 2px;
+  }
+
+  .cancel-button {
+    width: 80%;
+    text-align: center;
+    padding: 0.5rem 0;
+    margin-top: 0.8rem;
+  }
+
+  .result-container {
+    max-width: 100%;
+  }
+
+  .result-card {
+    padding: 1.2rem;
+    border-radius: 10px;
+  }
+
+  .result-title {
+    font-size: 1.1rem;
+  }
+
+  .result-text {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    min-height: 100px;
+    max-height: 250px;
+  }
+
+  .action-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .ai-tag {
+    font-size: 0.7rem;
+    margin-top: 0.8rem;
+  }
+
+  .error-text {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
   }
 }

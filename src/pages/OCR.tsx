@@ -14,7 +14,6 @@ const OCR = () => {
   const cancelledRef = useRef(false);
   const workerRef = useRef<any>(null);
 
-  // Refs for scan animation
   const cornerTLRef = useRef<HTMLDivElement>(null);
   const cornerTRRef = useRef<HTMLDivElement>(null);
   const cornerBLRef = useRef<HTMLDivElement>(null);
@@ -23,7 +22,6 @@ const OCR = () => {
   const scanBoxRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
 
-  // Convert file to data URL
   const readFileAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -33,8 +31,6 @@ const OCR = () => {
     });
   };
 
-  // Tesseract recognition with cancellation support
-  // Tesseract recognition with cancellation support
   const recognizeText = async (imgUrl: string) => {
     try {
       const { default: Tesseract } = await import("tesseract.js");
@@ -55,7 +51,6 @@ const OCR = () => {
 
       // ── Check if any text was found ──
       if (!data.text.trim()) {
-        // No text recognized – treat as error
         setError("Couldn't find any text. Please try a clearer image.");
         setPhase("idle");
         await worker.terminate();
@@ -63,7 +58,7 @@ const OCR = () => {
         return;
       }
 
-      // Success: text found
+      // Success
       setText(data.text);
       setError(null);
       setPhase("result");
@@ -78,7 +73,6 @@ const OCR = () => {
     }
   };
 
-  // Start scanning phase
   const startScan = useCallback(async (dataUrl: string, name: string) => {
     setImageUrl(dataUrl);
     setFileName(name);
@@ -90,7 +84,6 @@ const OCR = () => {
     recognizeText(dataUrl);
   }, []);
 
-  // Handle file upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -102,7 +95,6 @@ const OCR = () => {
     }
   };
 
-  // Handle paste
   const handlePaste = async (e: React.ClipboardEvent) => {
     const items = e.clipboardData?.items;
     if (!items) return;
@@ -119,14 +111,12 @@ const OCR = () => {
     }
   };
 
-  // Cancel scanning
   const handleCancel = () => {
     cancelledRef.current = true;
     if (workerRef.current) {
       workerRef.current.terminate();
       workerRef.current = null;
     }
-    // Kill animation
     if (animationRef.current) {
       animationRef.current.kill();
       animationRef.current = null;
@@ -136,7 +126,6 @@ const OCR = () => {
     setFileName("");
   };
 
-  // Copy result to clipboard
   const handleCopy = async () => {
     if (text) {
       await navigator.clipboard.writeText(text);
@@ -145,7 +134,6 @@ const OCR = () => {
     }
   };
 
-  // Restart (go back to idle)
   const handleScanAgain = () => {
     setPhase("idle");
     setText("");
@@ -154,7 +142,6 @@ const OCR = () => {
     setError(null);
   };
 
-  // Scanning animation effect
   useEffect(() => {
     if (phase !== "scanning") return;
 
@@ -168,13 +155,11 @@ const OCR = () => {
     const scanBox = scanBoxRef.current;
     if (!scanLine || !scanBox) return;
 
-    // Reset positions
     gsap.set(corners, { opacity: 0, scale: 0.8 });
     gsap.set(scanLine, { top: 0, opacity: 0, visibility: "hidden" });
 
     const tl = gsap.timeline({ repeat: -1, yoyo: true, repeatDelay: 0.3 });
 
-    // Show corners
     tl.to(corners, {
       opacity: 1,
       scale: 1,
@@ -182,7 +167,6 @@ const OCR = () => {
       stagger: 0.08,
       ease: "back.out(1.7)",
     })
-      // Laser sweeps from top to bottom
       .set(scanLine, { visibility: "visible", top: 0 })
       .to(scanLine, {
         top: scanBox.offsetHeight,
@@ -190,7 +174,6 @@ const OCR = () => {
         ease: "power2.inOut",
         opacity: 1,
       })
-      // Hide laser at bottom
       .to(scanLine, { opacity: 0, duration: 0.2 })
       .set(scanLine, { visibility: "hidden" });
 
@@ -219,6 +202,8 @@ const OCR = () => {
             onChange={handleImageUpload}
             style={{ display: "none" }}
           />
+          {/* ✅ Error visible in idle state */}
+          {error && <p className="error-text">{error}</p>}
         </div>
       )}
 

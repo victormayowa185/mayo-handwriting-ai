@@ -1,0 +1,292 @@
+.contact-container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #ffffff;
+  font-family: 'Mulish', sans-serif;
+  overflow:  !important;
+}
+
+.contact-card {
+  max-width: 500px;
+  width: 100%;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.contact-icon {
+  color: #8647f0;
+  margin-bottom: 1rem;
+}
+
+.contact-card h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0.75rem;
+}
+
+.contact-message {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.contact-email {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #8647f0;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  padding: 0.75rem 1.5rem;
+  border: 1.5px solid #8647f0;
+  border-radius: 60px;
+  transition: all 0.2s ease;
+}
+
+.contact-email:hover {
+  background: #8647f0;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(92, 123, 255, 0.2);
+}
+
+.contact-back {
+  display: block;
+  color: #888;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-back:hover {
+  color: #8647f0;
+}
+
+
+/* ==================== TABLET (600px - 799px) ==================== */
+@media (max-width: 799px) and (min-width: 600px) {
+  .contact-container {
+    min-height: 70vh;
+    padding: 2rem 1.25rem;
+  }
+
+  .contact-card {
+    max-width: 450px;
+    padding: 2.5rem 1.5rem;
+    border-radius: 28px;
+  }
+
+  .contact-icon {
+    margin-bottom: 0.9rem;
+  }
+
+  .contact-card h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .contact-message {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.6rem;
+  }
+
+  .contact-email {
+    font-size: 1.05rem;
+    padding: 0.65rem 1.3rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .contact-back {
+    font-size: 0.9rem;
+  }
+}
+
+/* ==================== SMALL TO MEDIUM (481px - 599px) ==================== */
+@media (max-width: 599px) and (min-width: 481px) {
+  .contact-container {
+    min-height: 70vh;
+    padding: 2rem 1rem;
+  }
+
+  .contact-card {
+    max-width: 100%;
+    padding: 2.2rem 1.4rem;
+    border-radius: 24px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.03);
+  }
+
+  .contact-icon {
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-card h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .contact-message {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.4rem;
+  }
+
+  .contact-email {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    border: 1.3px solid #8647f0;
+    margin-bottom: 1.4rem;
+  }
+
+  .contact-back {
+    font-size: 0.85rem;
+  }
+}
+
+/* ==================== SMALL DEVICES (320px - 480px) ==================== */
+@media (max-width: 480px) {
+  .contact-container {
+    min-height: 70vh;
+    padding: 1.5rem 1rem;
+  }
+
+  .contact-card {
+    max-width: 100%;
+    padding: 2rem 1.2rem;
+    border-radius: 22px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.03);
+  }
+
+  .contact-icon {
+    margin-bottom: 0.75rem;
+    font-size: 2.2rem;
+  }
+
+  .contact-card h1 {
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .contact-message {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #8647f0;
+    padding: 0.6rem 1.1rem;
+    border: 1.3px solid #8647f0;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+    min-height: 44px;
+    word-break: break-all;
+  }
+
+  .contact-email:active {
+    background: #8647f0;
+    color: #ffffff;
+    transform: scale(0.98);
+  }
+
+  .contact-back {
+    display: block;
+    color: #888;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-back:active {
+    color: #8647f0;
+  }
+}
+
+/* ==================== LANDSCAPE ORIENTATION ==================== */
+@media (max-height: 600px) and (orientation: landscape) {
+  .contact-container {
+    min-height: 70vh;
+    padding: 1.5rem 1rem;
+  }
+
+  .contact-card {
+    padding: 1.8rem 1.2rem;
+    border-radius: 20px;
+  }
+
+  .contact-icon {
+    margin-bottom: 0.6rem;
+    font-size: 2rem;
+  }
+
+  .contact-card h1 {
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-message {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  .contact-email {
+    font-size: 0.9rem;
+    padding: 0.55rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-back {
+    font-size: 0.75rem;
+  }
+  
+}
+
+/* ==================== TOUCH DEVICE OPTIMIZATION ==================== */
+@media (hover: none) and (pointer: coarse) {
+  .contact-email {
+    min-height: 48px;
+    min-width: 100%;
+  }
+
+  .contact-email:active {
+    background: #8647f0;
+    color: #ffffff;
+    transform: scale(0.96);
+    box-shadow: 0 6px 12px rgba(92, 123, 255, 0.15);
+  }
+
+  .contact-back:active {
+    color: #8647f0;
+    font-weight: 600;
+  }
+}
+
+/* ==================== ACCESSIBILITY & FOCUS STATES ==================== */
+.contact-email:focus-visible,
+.contact-back:focus-visible {
+  outline: 2px solid #8647f0;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==================== SMOOTH TRANSITIONS ==================== */
+* {
+  box-sizing: border-box;
+}
