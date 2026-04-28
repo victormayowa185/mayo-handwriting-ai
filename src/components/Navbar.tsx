@@ -7,7 +7,7 @@ import {
   FaTimes,
   FaHome,
 } from "react-icons/fa";
-import "../styles/Navbar.css";
+import "../styles/navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaEnvelope } from "react-icons/fa";
-import "../styles/Contact.css";
+import "../styles/contact.css";
 
 const Contact = () => (
   <div className="contact-container">

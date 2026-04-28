@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
-import { type Worker } from "tesseract.js"; // ← Import Worker type
+import type { Worker } from "tesseract.js";
 import "../styles/ocr.css";
 
 const OCR = () => {

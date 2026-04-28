@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { FaBrain, FaFileImage, FaUserCheck, FaShieldAlt } from "react-icons/fa";
-import "../styles/Home.css";
+import "../styles/home.css";
 
 const Home = () => {
   const heroTextRef = useRef<HTMLHeadingElement>(null);
