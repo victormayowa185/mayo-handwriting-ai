@@ -18,12 +18,31 @@
   justify-content: center;
 }
 
+.preloader-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(92, 123, 255, 0.15);
+  border: 2px solid #f0f0f0;
+  /* This links to the @keyframes blink below */
+  animation: blink 1.8s ease-in-out infinite; 
+}
+
 .preloader-footer {
-  /* REMOVED position: absolute */
-  /* REMOVED bottom: 2rem */
   padding-bottom: 2rem; /* This creates the breathing room safely */
   font-size: 0.875rem;
   color: #888;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 @media (max-width: 480px) {
