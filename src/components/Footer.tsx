@@ -16,7 +16,6 @@ const Footer = () => {
         </a>
       </p>
         <FaGithub size={24} />
-      </a>
     </footer>
   );
 };
