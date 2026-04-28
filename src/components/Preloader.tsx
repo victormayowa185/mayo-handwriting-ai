@@ -5,7 +5,7 @@ const Preloader = () => (
     <div className="preloader-content">
       <img src="/preloader.png" alt="AI Brain" className="preloader-image" />
     </div>
-    <p className="preloader-footer">Built by Victor Mayowa</p>
+    <p className="preloader-footer">Built by Keneth</p>
   </div>
 );
 export default Preloader;
