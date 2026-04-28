@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop";
+import ReactCrop, { type Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import "../styles/imageCropper.css";
 
@@ -17,29 +17,38 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
     x: 10,
     y: 15,
   });
-  const [completedCrop, setCompletedCrop] = useState<PixelCrop | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const handleCropComplete = (c: PixelCrop) => {
-    setCompletedCrop(c);
-  };
-
   const handleScanCropped = () => {
-    if (!completedCrop || !imageRef.current) return;
+    const img = imageRef.current;
+    if (!img) return;
+
+    const displayedWidth = img.width;
+    const displayedHeight = img.height;
+    const naturalWidth = img.naturalWidth;
+    const naturalHeight = img.naturalHeight;
+
+    // Convert percentage crop to pixel coordinates
+    const x = (crop.x * displayedWidth) / 100;
+    const y = (crop.y * displayedHeight) / 100;
+    const width = (crop.width * displayedWidth) / 100;
+    const height = (crop.height * displayedHeight) / 100;
+
+    const scaleX = naturalWidth / displayedWidth;
+    const scaleY = naturalHeight / displayedHeight;
+
     const canvas = document.createElement("canvas");
-    const scaleX = imageRef.current.naturalWidth / imageRef.current.width;
-    const scaleY = imageRef.current.naturalHeight / imageRef.current.height;
-    canvas.width = completedCrop.width * scaleX;
-    canvas.height = completedCrop.height * scaleY;
+    canvas.width = width * scaleX;
+    canvas.height = height * scaleY;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     ctx.drawImage(
-      imageRef.current,
-      completedCrop.x * scaleX,
-      completedCrop.y * scaleY,
-      completedCrop.width * scaleX,
-      completedCrop.height * scaleY,
+      img,
+      x * scaleX,
+      y * scaleY,
+      canvas.width,
+      canvas.height,
       0,
       0,
       canvas.width,
@@ -50,7 +59,6 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
   };
 
   const handleScanFull = () => {
-    // pass original image unchanged
     onCrop(imageUrl);
   };
 
@@ -61,7 +69,7 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
         <ReactCrop
           crop={crop}
           onChange={(c) => setCrop(c)}
-          onComplete={handleCropComplete}
+          onComplete={() => {}}
           aspect={undefined}
           className="crop-react-area"
         >
