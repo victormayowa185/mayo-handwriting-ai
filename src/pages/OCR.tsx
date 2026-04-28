@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import type { Worker } from "tesseract.js";
+import CameraCapture from "../components/CameraCapture"; // ← new import
 import "../styles/ocr.css";
 
 const OCR = () => {
@@ -9,10 +10,11 @@ const OCR = () => {
   const [phase, setPhase] = useState<"idle" | "scanning" | "result">("idle");
   const [fileName, setFileName] = useState<string>("");
   const [copied, setCopied] = useState(false);
+  const [showCamera, setShowCamera] = useState(false); // ← new state
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cancelledRef = useRef(false);
-  const workerRef = useRef<Worker | null>(null); // ← no more any
+  const workerRef = useRef<Worker | null>(null);
 
   const cornerTLRef = useRef<HTMLDivElement>(null);
   const cornerTRRef = useRef<HTMLDivElement>(null);
@@ -49,7 +51,6 @@ const OCR = () => {
         return;
       }
 
-      // ── Check if any text was found ──
       if (!data.text.trim()) {
         setError("Couldn't find any text. Please try a clearer image.");
         setPhase("idle");
@@ -58,7 +59,6 @@ const OCR = () => {
         return;
       }
 
-      // Success
       setText(data.text);
       setError(null);
       setPhase("result");
@@ -90,7 +90,7 @@ const OCR = () => {
       const dataUrl = await readFileAsDataURL(file);
       startScan(dataUrl, file.name);
     } catch (err) {
-      console.error(err); // now err is used
+      console.error(err);
       setError("Failed to read image.");
     }
   };
@@ -189,19 +189,38 @@ const OCR = () => {
       {phase === "idle" && (
         <div className="idle-container">
           <p className="page-tip">Upload an image or paste from clipboard</p>
-          <label htmlFor="file-upload" className="upload-button">
-            Choose File
-          </label>
-          <input
-            id="file-upload"
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleImageUpload}
-            style={{ display: "none" }}
-          />
+          <div className="upload-actions">
+            <label htmlFor="file-upload" className="upload-button">
+              Choose File
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
+            <button
+              className="upload-button camera-button"
+              onClick={() => setShowCamera(true)}
+            >
+              Take Photo
+            </button>
+          </div>
           {error && <p className="error-text">{error}</p>}
         </div>
+      )}
+
+      {/* ── Camera Overlay ── */}
+      {showCamera && (
+        <CameraCapture
+          onCapture={(dataUrl) => {
+            setShowCamera(false);
+            startScan(dataUrl, "Camera photo");
+          }}
+          onClose={() => setShowCamera(false)}
+        />
       )}
 
       {/* ── Scanning State ── */}

@@ -50,12 +50,36 @@
   padding: 0.85rem 2.5rem;
   font-weight: 600;
   font-size: 1.1rem;
-  border-radius: 50px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 14px rgba(134, 71, 240, 0.25);
 }
 
+.camera-button {
+  background: transparent;
+  color: #8647f0;
+  border: 2px solid #8647f0;
+  padding: 0.85rem 2.5rem;  /* match the size of Choose File */
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.camera-button:hover {
+  background: #8647f0;
+  color: #fff;
+}
+
+
+.upload-actions {
+  display: flex;
+  gap: 1rem;                /* space between buttons */
+  justify-content: center;
+  flex-wrap: wrap;          /* allows stacking on very small screens */
+  margin-top: 0.5rem;
+}
 .upload-button:hover {
   background-color: #6e2fd4;
   transform: translateY(-2px);
@@ -98,6 +122,7 @@
   color: #333;
   font-weight: 500;
 }
+
 
 /* ── QR‑style corners ── */
 .corner {
