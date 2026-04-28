@@ -42,6 +42,14 @@
   color: #888;
 }
 @media (max-width: 480px) {
+  .preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+ 
+}
   .preloader-image {
     width: 140px;
     height: 140px;
