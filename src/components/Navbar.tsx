@@ -13,7 +13,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
 
-  // Apply the dark class on mount (no setState inside effect)
   useEffect(() => {
     if (localStorage.getItem("theme") === "dark") {
       document.documentElement.classList.add("dark");
