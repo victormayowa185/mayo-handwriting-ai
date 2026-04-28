@@ -182,7 +182,7 @@ const Home = () => {
 
         <div className="content-area" ref={contentAreaRef}>
           <h1 className="hero-text" ref={heroTextRef}>
-            <span className="brand">MAYO</span> Handwriting AI
+            <span className="brand">AI</span> Handwriting Recognition
           </h1>
           <div className="scan-line" ref={scanLineRef}></div>
           <div className="output-text" ref={outputRef}>

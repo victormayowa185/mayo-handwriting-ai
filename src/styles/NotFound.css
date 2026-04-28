@@ -1,0 +1,75 @@
+/* =====================
+   404 Page – Compact & No‑Scroll
+   Primary: #8647f0
+   ===================== */
+
+.not-found-page {
+  background-color: #ffffff;
+  min-height: 0;                          /* remove any forced height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Mulish', sans-serif;
+  padding: 1.5rem 1rem;                  /* tighter padding */
+}
+
+.not-found-card {
+  text-align: center;
+  max-width: 420px;                      /* slightly narrower */
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;                  /* smaller inner spacing */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.not-found-code {
+  font-size: clamp(3rem, 10vw, 5rem);    /* smaller 404 text */
+  font-weight: 800;
+  color: #8647f0;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.not-found-title {
+  font-size: 1.3rem;                     /* slightly smaller */
+  font-weight: 700;
+  color: #121212;
+  margin-bottom: 0.6rem;
+}
+
+.not-found-message {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.not-found-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #8647f0;
+  color: #ffffff;
+  padding: 0.7rem 1.8rem;               /* smaller button */
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(134, 71, 240, 0.25);
+}
+
+.not-found-link:hover {
+  background-color: #6e2fd4;
+  transform: translateY(-2px);
+}
+.not-found-link:active {
+  transform: translateY(0);
+}
+.arrow {
+  transition: transform 0.3s ease;
+}
+.not-found-link:hover .arrow {
+  transform: translateX(4px);
+}

@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
+import { type Worker } from "tesseract.js"; // ← Import Worker type
 import "../styles/ocr.css";
 
 const OCR = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [text, setText] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<"idle" | "scanning" | "result">("idle");
@@ -12,7 +12,7 @@ const OCR = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cancelledRef = useRef(false);
-  const workerRef = useRef<any>(null);
+  const workerRef = useRef<Worker | null>(null); // ← no more any
 
   const cornerTLRef = useRef<HTMLDivElement>(null);
   const cornerTRRef = useRef<HTMLDivElement>(null);
@@ -74,7 +74,6 @@ const OCR = () => {
   };
 
   const startScan = useCallback(async (dataUrl: string, name: string) => {
-    setImageUrl(dataUrl);
     setFileName(name);
     setText("");
     setError(null);
@@ -91,6 +90,7 @@ const OCR = () => {
       const dataUrl = await readFileAsDataURL(file);
       startScan(dataUrl, file.name);
     } catch (err) {
+      console.error(err); // now err is used
       setError("Failed to read image.");
     }
   };
@@ -122,7 +122,6 @@ const OCR = () => {
       animationRef.current = null;
     }
     setPhase("idle");
-    setImageUrl(null);
     setFileName("");
   };
 
@@ -137,7 +136,6 @@ const OCR = () => {
   const handleScanAgain = () => {
     setPhase("idle");
     setText("");
-    setImageUrl(null);
     setFileName("");
     setError(null);
   };
@@ -202,7 +200,6 @@ const OCR = () => {
             onChange={handleImageUpload}
             style={{ display: "none" }}
           />
-          {/* ✅ Error visible in idle state */}
           {error && <p className="error-text">{error}</p>}
         </div>
       )}
