@@ -15,13 +15,6 @@ const Footer = () => {
           Keneth
         </a>
       </p>
-      <a
-        href="https://github.com/victormayowa185"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="github-link"
-        aria-label="GitHub"
-      >
         <FaGithub size={24} />
       </a>
     </footer>
