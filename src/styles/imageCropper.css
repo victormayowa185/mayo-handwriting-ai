@@ -1,0 +1,91 @@
+.crop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crop-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 92%;
+  max-width: 600px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.crop-title {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #121212;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.crop-preview-img {
+  max-width: 100%;
+  display: block;
+}
+
+.crop-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.crop-btn {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.scan-crop-btn {
+  background: #8647f0;
+  color: #fff;
+}
+.scan-crop-btn:hover {
+  background: #6e2fd4;
+  transform: translateY(-2px);
+}
+
+.scan-full-btn {
+  background: transparent;
+  color: #8647f0;
+  border: 2px solid #8647f0;
+}
+.scan-full-btn:hover {
+  background: #8647f0;
+  color: #fff;
+}
+
+.cancel-crop-btn {
+  background: #eee;
+  color: #333;
+}
+.cancel-crop-btn:hover {
+  background: #ccc;
+}
+
+@media (max-width: 480px) {
+  .crop-card {
+    width: 96%;
+    padding: 1rem;
+  }
+  .crop-btn {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+}

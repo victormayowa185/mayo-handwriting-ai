@@ -1,20 +1,27 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import type { Worker } from "tesseract.js";
-import CameraCapture from "../components/CameraCapture"; // ← new import
+import CameraCapture from "../components/CameraCapture";
+import ImageCropper from "../components/ImageCropper"; // ← new import
 import "../styles/ocr.css";
 
 const OCR = () => {
   const [text, setText] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const [phase, setPhase] = useState<"idle" | "scanning" | "result">("idle");
+  const [phase, setPhase] = useState<"idle" | "crop" | "scanning" | "result">(
+    "idle",
+  ); // ← added "crop"
   const [fileName, setFileName] = useState<string>("");
   const [copied, setCopied] = useState(false);
-  const [showCamera, setShowCamera] = useState(false); // ← new state
+  const [showCamera, setShowCamera] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cancelledRef = useRef(false);
   const workerRef = useRef<Worker | null>(null);
+
+  // Refs to hold the raw image and its name before cropping
+  const rawImageRef = useRef<string | null>(null);
+  const rawFileNameRef = useRef<string>("");
 
   const cornerTLRef = useRef<HTMLDivElement>(null);
   const cornerTRRef = useRef<HTMLDivElement>(null);
@@ -83,12 +90,28 @@ const OCR = () => {
     recognizeText(dataUrl);
   }, []);
 
+  // Handler when crop is confirmed (cropped or full image)
+  const handleCropComplete = useCallback(
+    (croppedDataUrl: string) => {
+      const name = rawFileNameRef.current || "Cropped image";
+      startScan(croppedDataUrl, name);
+    },
+    [startScan],
+  );
+
+  // Go to crop phase with raw image
+  const goToCrop = useCallback((dataUrl: string, name: string) => {
+    rawImageRef.current = dataUrl;
+    rawFileNameRef.current = name;
+    setPhase("crop");
+  }, []);
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
       const dataUrl = await readFileAsDataURL(file);
-      startScan(dataUrl, file.name);
+      goToCrop(dataUrl, file.name); // ← go to crop instead of startScan
     } catch (err) {
       console.error(err);
       setError("Failed to read image.");
@@ -104,12 +127,21 @@ const OCR = () => {
         if (file) {
           e.preventDefault();
           const dataUrl = await readFileAsDataURL(file);
-          startScan(dataUrl, "Pasted image");
+          goToCrop(dataUrl, "Pasted image"); // ← go to crop
           break;
         }
       }
     }
   };
+
+  // Camera capture handler
+  const handleCameraCapture = useCallback(
+    (dataUrl: string) => {
+      setShowCamera(false);
+      goToCrop(dataUrl, "Camera photo"); // ← go to crop
+    },
+    [goToCrop],
+  );
 
   const handleCancel = () => {
     cancelledRef.current = true;
@@ -215,11 +247,17 @@ const OCR = () => {
       {/* ── Camera Overlay ── */}
       {showCamera && (
         <CameraCapture
-          onCapture={(dataUrl) => {
-            setShowCamera(false);
-            startScan(dataUrl, "Camera photo");
-          }}
+          onCapture={handleCameraCapture}
           onClose={() => setShowCamera(false)}
+        />
+      )}
+
+      {/* ── Crop Phase ── */}
+      {phase === "crop" && rawImageRef.current && (
+        <ImageCropper
+          imageUrl={rawImageRef.current}
+          onCrop={(croppedUrl) => handleCropComplete(croppedUrl)}
+          onCancel={() => setPhase("idle")}
         />
       )}
 
