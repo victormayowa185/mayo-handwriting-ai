@@ -52,7 +52,7 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
       0,
       0,
       canvas.width,
-      canvas.height,
+      canvas.height
     );
     const croppedDataUrl = canvas.toDataURL("image/jpeg", 0.9);
     onCrop(croppedDataUrl);
@@ -70,6 +70,7 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
           crop={crop}
           onChange={(c) => setCrop(c)}
           onComplete={() => {}}
+          unit="%"                       // ← always keep percentages
           aspect={undefined}
           className="crop-react-area"
         >
@@ -81,10 +82,7 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
           />
         </ReactCrop>
         <div className="crop-actions">
-          <button
-            className="crop-btn scan-crop-btn"
-            onClick={handleScanCropped}
-          >
+          <button className="crop-btn scan-crop-btn" onClick={handleScanCropped}>
             Scan Cropped
           </button>
           <button className="crop-btn scan-full-btn" onClick={handleScanFull}>
