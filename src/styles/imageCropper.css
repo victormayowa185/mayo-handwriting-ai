@@ -14,6 +14,8 @@
   padding: 1.5rem;
   width: 92%;
   max-width: 600px;
+  max-height: 90vh;          /* 👈 never taller than 90% of the screen */
+  overflow-y: auto;          /* 👈 scroll inside the card if needed */
   box-shadow: 0 12px 30px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
@@ -28,8 +30,11 @@
   text-align: center;
 }
 
+/* let the image shrink naturally so the buttons stay reachable */
 .crop-preview-img {
   max-width: 100%;
+  max-height: 60vh;          /* optional but helpful on tall screenshots */
+  object-fit: contain;
   display: block;
 }
 
@@ -39,6 +44,7 @@
   margin-top: 1.2rem;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 0.5rem;    /* a little breathing room at the bottom */
 }
 
 .crop-btn {
@@ -83,6 +89,7 @@
   .crop-card {
     width: 96%;
     padding: 1rem;
+    max-height: 85vh;        /* a little more room on small screens */
   }
   .crop-btn {
     flex: 1;
