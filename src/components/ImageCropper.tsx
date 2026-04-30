@@ -28,11 +28,30 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
     const naturalWidth = img.naturalWidth;
     const naturalHeight = img.naturalHeight;
 
-    // Convert percentage crop to pixel coordinates
-    const x = (crop.x * displayedWidth) / 100;
-    const y = (crop.y * displayedHeight) / 100;
-    const width = (crop.width * displayedWidth) / 100;
-    const height = (crop.height * displayedHeight) / 100;
+    // Normalise crop values to percentages regardless of unit
+    let xPercent: number,
+      yPercent: number,
+      widthPercent: number,
+      heightPercent: number;
+
+    if (crop.unit === "px") {
+      xPercent = (crop.x / displayedWidth) * 100;
+      yPercent = (crop.y / displayedHeight) * 100;
+      widthPercent = (crop.width / displayedWidth) * 100;
+      heightPercent = (crop.height / displayedHeight) * 100;
+    } else {
+      // already percentage
+      xPercent = crop.x;
+      yPercent = crop.y;
+      widthPercent = crop.width;
+      heightPercent = crop.height;
+    }
+
+    // Convert percentages to pixel coordinates on the displayed image
+    const x = (xPercent * displayedWidth) / 100;
+    const y = (yPercent * displayedHeight) / 100;
+    const width = (widthPercent * displayedWidth) / 100;
+    const height = (heightPercent * displayedHeight) / 100;
 
     const scaleX = naturalWidth / displayedWidth;
     const scaleY = naturalHeight / displayedHeight;
@@ -70,7 +89,6 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
           crop={crop}
           onChange={(c) => setCrop(c)}
           onComplete={() => {}}
-          unit="%"                       // ← always keep percentages
           aspect={undefined}
           className="crop-react-area"
         >
