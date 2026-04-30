@@ -28,8 +28,11 @@ const ImageCropper = ({ imageUrl, onCrop, onCancel }: ImageCropperProps) => {
     const naturalWidth = img.naturalWidth;
     const naturalHeight = img.naturalHeight;
 
-    // Normalise crop values to percentages, regardless of current unit
-    let xPercent: number, yPercent: number, widthPercent: number, heightPercent: number;
+    // Normalise crop values to percentages regardless of unit
+    let xPercent: number,
+      yPercent: number,
+      widthPercent: number,
+      heightPercent: number;
 
     if (crop.unit === "px") {
       xPercent = (crop.x / displayedWidth) * 100;
